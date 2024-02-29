@@ -6,7 +6,11 @@ namespace OccurenceTrigger.Models
     {
         public void StartMonitoring()
         {
-            var indicators = context.IndicatorHistorics.ToList();
+            var indicators = context.IndicatorHistorics
+                            .Where(indicator => context.TriggerConfigurations.Any(trigger => trigger.IndicatorId == indicator.IndicatorId))
+                            .GroupBy(indicator => indicator.IndicatorId)
+                            .Select(group => group.OrderByDescending(ind => ind.Date).First())
+                            .ToList();
 
             foreach (var indicator in indicators)
             {

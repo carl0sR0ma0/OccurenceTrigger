@@ -8,15 +8,15 @@ namespace OccurenceTrigger.Models
         public void NotifyObserver(IndicatorHistoric indicator)
         {
             var triggerConfigurations = context.TriggerConfigurations
-            .Where(c => c.IndicatorId == indicator.IndicatorId)
+            .Where(c => c.IndicatorId == indicator.IndicatorId && c.Status == true)
             .ToList();
 
             foreach (var triggerConfiguration in triggerConfigurations)
             {
                 var observer = CreateObserver(triggerConfiguration);
 
-                if ((bool)(observer?.VerifyCondition(indicator)))
-                    observer?.Analyze(indicator, triggerConfiguration);
+                if (observer is not null && observer.VerifyCondition(indicator))
+                    observer?.Shoot(indicator, triggerConfiguration);
             }
         }
 

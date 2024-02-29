@@ -2,7 +2,7 @@
 {
     public class TriggerVFR(double referencePercentage, double lastValue, TriggerModule triggerModule) : IObserverTrigger
     {
-        public void Analyze(IndicatorHistoric indicator, TriggerConfiguration triggerConfiguration)
+        public void Shoot(IndicatorHistoric indicator, TriggerConfiguration triggerConfiguration)
         {
             lastValue = indicator.Value;
             triggerModule.OpenOccurrence(indicator, triggerConfiguration, $"Valor fora do range. Valor atual: {indicator.Value}", lastValue);

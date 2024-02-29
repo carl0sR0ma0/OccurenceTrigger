@@ -4,7 +4,7 @@
     {
         private readonly TriggerModule triggerModule = triggerModule;
 
-        public void Analyze(IndicatorHistoric indicator, TriggerConfiguration triggerConfiguration)
+        public void Shoot(IndicatorHistoric indicator, TriggerConfiguration triggerConfiguration)
         {
             triggerModule.OpenOccurrence(indicator, triggerConfiguration, $"Indicador não aderente no turno. Valor atual: {indicator.Value}");
         }
